@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class MenuScreen implements Screen {
 	
@@ -23,7 +25,9 @@ public class MenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 1920, 1080);
 		
-		stage.addActor(new Asset("images/MenuMainPicture.png", 0, 0, DameMain.WIDTH, DameMain.HEIGHT));
+		Image img = new Image(new Texture("images/MenuMainPicture.png"));
+		img.setBounds(0, 0, DameMain.WIDTH, DameMain.HEIGHT);
+		stage.addActor(img);
 		stage.addActor(new ButtonActor("images/ButtenStart.png", 175f, 100f, game));
 		
 	}

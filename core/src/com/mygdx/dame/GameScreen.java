@@ -28,8 +28,8 @@ public class GameScreen implements Screen {
 	
 	private static Board board = new Board();
 	private static ArrayList<Token> tr = new ArrayList<Token>();
-	protected static Player[] players = new Player[2];
 	
+	protected static Player[] players = new Player[2];
 	protected static Stage stage;
 	
 	public GameScreen(DameMain game){
@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 800, 600);
 		
-		for(Asset a: board.getAssets()){
+		for(Image a: board.getAssets()){
 			stage.addActor(a);
 		}
 		
@@ -59,17 +59,26 @@ public class GameScreen implements Screen {
 		players[0] = new Player("images/TokenWhite.png", 0, board.getAssets());
 		players[1] = new Player("images/Token.png", 1, board.getAssets());
 		for(int i = 0; i <players[0].getRemainingTokenCount(); i++){
-			tokens.add(players[0].getRemainingToken() [i]);
-			tokens.add(players[1].getRemainingToken() [i]);
+			tokens.add(players[0].getRemainingToken().get(i));
+			tokens.add(players[1].getRemainingToken().get(i));
 		}
 		return tokens;
 		}
 
 	public static void updateTokenPosition(){
 		for(Token t : tr){
-			t.movement((board.getAssets()));
+			t.movement(board.getAssets());
 		}
 	}
+	
+	public static void updateTokenPosition(Token tr){
+	int[] iter = {0, 1, -1, 8 , -8, 16, -16, 2, -2, -3, 3, -4, 4, 17, -17};
+		for(int i = 0 ; i < iter.length; i++){
+			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
+				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());
+		}
+	}
+	
 	@Override
 	public void show() {
 		

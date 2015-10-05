@@ -4,39 +4,53 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private Token[] tokens = new Token[12];
+	private ArrayList<Token> tokens = new ArrayList<Token>();
 	int ID = 0; 
 	private boolean playercanMove;
+	private String pfad;
 	
-	public Player(String pfad, int ID, ArrayList<Asset> board){
+	public Player(String pfad, int ID, ArrayList<AbstractAsset> board){	
+		this.pfad = pfad;
 		this.ID = ID;
 		if(ID == 0){
 			playercanMove = true;
 			for(int i = 0; i < 12; i++){
 				if(((i *2 ) / 8) % 2 != 0){
-					tokens[i] = new Token(pfad, board, i *2 + 1);
-					tokens[i].setPlayer(this);
+					tokens.add(new Token(pfad, board.get( i *2 + 1), this));
 				}else{
-					tokens[i] = new Token(pfad, board, i *2);
-					tokens[i].setPlayer(this);
+					tokens.add(new Token(pfad, board.get(i *2), this));
 				}
 			}
 		}else{
 			playercanMove = false;
 			for(int i = 0; i < 12; i++){
 				if(((i *2 ) / 8) % 2 != 0){
-					tokens[i] = new Token(pfad, board, 62 -(i * 2 -1));
-					tokens[i].setPlayer(this);
+					tokens.add(new Token(pfad, board.get(62 -(i * 2 -1)), this));
 			}else{
-				tokens[i] = new Token(pfad, board, 62 -(i * 2));
-				tokens[i].setPlayer(this);
+				tokens.add(new Token(pfad, board.get(62 -(i * 2)), this));
 			}
 			}
 		}
 	}
+
 	
+	public void addToken(Token t){
+		tokens.add(t);
+	}
+	
+	public void removeToken(Token t){
+		for(int i = 0; i < tokens.size(); i++){
+			if(t.equals(tokens.get(i))){
+				tokens.remove(i);
+			}
+		}
+	}
+	
+	public String getTokenPfad(){
+		return pfad;
+	}
 	public int getRemainingTokenCount(){
-		return tokens.length;
+		return tokens.size();
 	}
 
 	public boolean getPlayerCanMove(){
@@ -46,7 +60,7 @@ public class Player {
 	public void setPlayerCanMove(boolean canMove){
 		playercanMove = canMove;
 	}
-	public Token[] getRemainingToken(){
+	public ArrayList<Token> getRemainingToken(){
 		return tokens;
 	}
 	
