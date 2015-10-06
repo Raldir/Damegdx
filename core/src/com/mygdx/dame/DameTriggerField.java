@@ -1,6 +1,6 @@
 package com.mygdx.dame;
 
-public class DameTriggerField extends AbstractAsset {
+public class DameTriggerField extends Asset {
 	
 	public int iD;
 	private String tokenPfad;

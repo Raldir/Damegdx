@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public abstract class AbstractAsset extends Image {
+public class Asset extends Image {
 
 	public Token token = null;
 	public int index;
 	
-	public AbstractAsset(String pfad, float x, float y, float width, float height, int index){
+	public Asset(String pfad, float x, float y, float width, float height, int index){
 		super(createTexture(pfad));
 		super.setBounds(x, y, width, height);
 		this.index = index;
@@ -20,7 +20,9 @@ public abstract class AbstractAsset extends Image {
 		
 	}
 	
-	public abstract boolean specialEvent();
+	public boolean specialEvent() {
+		return false;
+	}
 	
 	public static Texture createTexture(String pfad){
 		Texture texture_back = new Texture(Gdx.files.internal(pfad));
@@ -50,7 +52,7 @@ public abstract class AbstractAsset extends Image {
 		setToken(null);
 	}
 	
-	public void refreshToken(ArrayList<AbstractAsset> as){
+	public void refreshToken(ArrayList<Asset> as){
 		if(token != null){
 			token.movement(as);
 		}

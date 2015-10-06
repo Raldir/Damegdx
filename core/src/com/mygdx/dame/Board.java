@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Board{
 	
-	ArrayList<AbstractAsset> squares = new ArrayList<AbstractAsset>();
+	ArrayList<Asset> squares = new ArrayList<Asset>();
 	
 	
 	public Board(){
@@ -48,7 +48,7 @@ public class Board{
 	}
 	
 	
-	public ArrayList<AbstractAsset> getAssets(){
+	public ArrayList<Asset> getAssets(){
 		return squares;
 	}
 }

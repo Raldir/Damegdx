@@ -9,7 +9,7 @@ public class Player {
 	private boolean playercanMove;
 	private String pfad;
 	
-	public Player(String pfad, int ID, ArrayList<AbstractAsset> board){	
+	public Player(String pfad, int ID, ArrayList<Asset> board){	
 		this.pfad = pfad;
 		this.ID = ID;
 		if(ID == 0){

@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
 	}
 	
 	public static void updateTokenPosition(Token tr){
-	int[] iter = {0, 1, -1, 8 , -8, 16, -16, 2, -2, -3, 3, -4, 4, 17, -17};
+	int[] iter = {0, 1, -1, 8 , -8, 16, -16};
 		for(int i = 0 ; i < iter.length; i++){
 			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
 				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());

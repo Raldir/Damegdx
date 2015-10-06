@@ -17,12 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 
 public class Token extends Image {
 
-	AbstractAsset field = null;
+	Asset field = null;
 	DragAndDrop dragAndDrop = new DragAndDrop();
 	Player player;
 	String pfad;
 
-	public Token(String pfad, AbstractAsset as, Player p){
+	public Token(String pfad, Asset as, Player p){
 		super(createTexture(pfad));
 		super.setWidth(DameMain.WIDTH / 8);
 		super.setHeight((DameMain.HEIGHT / 8));
@@ -32,7 +32,7 @@ public class Token extends Image {
 		GameScreen.stage.addActor(this);
 	}
 	
-	public AbstractAsset getField(){
+	public Asset getField(){
 		return field;
 	}
 	
@@ -44,7 +44,7 @@ public class Token extends Image {
 		return player;
 	}
 	
-	public void move(AbstractAsset field){
+	public void move(Asset field){
 		this.field = field;
 		field.setToken(this);
 		setPosition(field.getX(), field.getY());
@@ -52,7 +52,7 @@ public class Token extends Image {
 		GameScreen.updateTokenPosition(this);
 	}
 	
-	public void move(AbstractAsset field, AbstractAsset prevField){
+	public void move(Asset field, Asset prevField){
 		if(player.getPlayerCanMove()){
 			System.out.println(field.getClass().toString());
 			this.field = field;
@@ -71,7 +71,7 @@ public class Token extends Image {
 		}
 	}
 	
-	public void jumpOver(AbstractAsset field, AbstractAsset prevField, AbstractAsset jumpOverField){
+	public void jumpOver(Asset field, Asset prevField, Asset jumpOverField){
 		if(player.getPlayerCanMove()){
 			this.field = field;
 			this.field.setToken(this);
@@ -83,7 +83,7 @@ public class Token extends Image {
 		}
 	}
 	
-	public void addTarget(final ArrayList<AbstractAsset> assets, final int target, Player p){
+	public void addTarget(final ArrayList<Asset> assets, final int target, Player p){
 		if(field.getIndex() + target + target >= 0 &&field.getIndex() + target + target < assets.size() && assets.get(field.getIndex() + target).getToken() != null && assets.get(field.getIndex() + target).getToken().getPlayer() != this.player){
 			dragAndDrop.addTarget(new Target(assets.get(field.getIndex() + target + target)){
 				public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
@@ -103,7 +103,7 @@ public class Token extends Image {
 		}
 	}
 	
-	public void setGenerellMovement(Player p, final ArrayList<AbstractAsset> assets){
+	public void setGenerellMovement(Player p, final ArrayList<Asset> assets){
 		if(this.player.getID() == 0){
 			if(field.getIndex() + 8 < assets.size() && assets.get(field.getIndex() + 8).getToken() == null){
 				dragAndDrop.addTarget(new Target(assets.get(field.getIndex() + 8)) {
@@ -144,7 +144,7 @@ public class Token extends Image {
 	}
 	
 	
-	public void movement(ArrayList<AbstractAsset> assets){
+	public void movement(ArrayList<Asset> assets){
 			dragAndDrop.clear();
 			final Image imgOrigin = new Image(new Texture(pfad));
 			imgOrigin.setBounds(0, 0, DameMain.WIDTH / 8, DameMain.HEIGHT / 8);
