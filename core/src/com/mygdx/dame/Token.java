@@ -30,6 +30,7 @@ public class Token extends Image {
 		player = p;
 		move(as);
 		GameScreen.stage.addActor(this);
+		p.addToken(this);
 	}
 	
 	public Asset getField(){
