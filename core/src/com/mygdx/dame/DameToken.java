@@ -60,10 +60,7 @@ public class DameToken extends Token {
 	}
 	
 	public void addTargetHorizontal(final ArrayList<Asset> assets, final int target, Player p){
-		System.out.println(field.getIndex());
 		if(field.getIndex() + target >= 0 && field.getIndex() + target < assets.size()){
-			System.out.println("firstif");
-			System.out.println(checkifNegativ(target,1));
 			dragAndDrop.addTarget(new Target(assets.get(field.getIndex() + target)){
 				public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
 					getActor().setColor(Color.GREEN);
@@ -77,13 +74,13 @@ public class DameToken extends Token {
 				public void drop (Source source, Payload payload, float x, float y, int pointer) {
 					boolean jumpedOver = false;
 					boolean tokenInWay = false;
-					for(int i = 1; i < Math.abs(target); i++){
+					for(int i = 1; i <= Math.abs(target); i++){
 						if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken() != null){
 							if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken().getPlayer().getID() != player.getID()){
 								jumpOver(assets.get(field.getIndex() + checkifNegativ(target, i) + checkifNegativ(target, 1)),
 								field, assets.get(field.getIndex() + checkifNegativ(target, i)));
-								System.out.println("jumpedOver");
 								jumpedOver = true;
+								break;
 							}
 							tokenInWay = true;
 						}
@@ -115,13 +112,17 @@ public class DameToken extends Token {
 				public void drop (Source source, Payload payload, float x, float y, int pointer) {
 					boolean jumpedOver = false;
 					boolean tokenInWay = false;
-					for(int i = 8; i < Math.abs(target); i+=8){
+					for(int i = 8; i <= Math.abs(target); i+=8){
+						System.out.println(i);
+						System.out.println(checkifNegativ(target, i));
+						System.out.println(field.getIndex());
+						System.out.println(field.getIndex() + checkifNegativ(target, i));
 						if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken() != null){
 							if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken().getPlayer().getID() != player.getID()){
 								jumpOver(assets.get(field.getIndex() + checkifNegativ(target, i) + checkifNegativ(target, 8)),
 								field, assets.get(field.getIndex() + checkifNegativ(target, i)));
-								System.out.println("jumpedOver");
 								jumpedOver = true;
+								break;
 							}
 							tokenInWay = true;
 						}
@@ -177,16 +178,14 @@ public class DameToken extends Token {
 		
 		for(int i = 1; i <= xValue; i++){
 			addTargetHorizontal(assets, -i, this.getPlayer());
-			System.out.println(0);
 		}
 		for(int i = 1; i < 8 - xValue; i++){
 			addTargetHorizontal(assets, i, this.getPlayer());
-			System.out.println(1);
 		}
-		for(int i = 0; i < 56 - (yValue * 8); i++){
+		for(int i = 1; i < 56 - (yValue * 8); i++){
 			addTargetVertical(assets, i * 8, this.getPlayer());
 		}
-		for(int i = 0; i < yValue * 8; i++){
+		for(int i = 1; i <= yValue; i++){
 			addTargetVertical(assets, -i * 8, this.getPlayer());
 		}
 	}

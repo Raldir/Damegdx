@@ -79,6 +79,7 @@ public class Token extends Image {
 			setPosition(field.getX(), field.getY());
 			jumpOverField.removeToken();
 			GameScreen.updateTokenPosition(this);
+			field.specialEvent();
 			setVisible(true);
 		}
 	}
