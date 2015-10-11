@@ -29,8 +29,7 @@ public class Token extends Image {
 		this.pfad = pfad;
 		player = p;
 		move(as);
-		GameScreen.stage.addActor(this);
-		p.addToken(this);
+
 	}
 	
 	public Asset getField(){

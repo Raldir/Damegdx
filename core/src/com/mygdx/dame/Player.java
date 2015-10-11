@@ -44,6 +44,9 @@ public class Player {
 				tokens.remove(i);
 			}
 		}
+		if(tokens.size() == 0){
+			System.out.println("Player" + ID + "  lost. I hope you had fun!");
+		}
 	}
 	
 	public String getTokenPfad(){
