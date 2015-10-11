@@ -23,7 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 
 public class GameScreen implements Screen {
 
-	private DameMain game;
+	private static DameMain game;
 	private OrthographicCamera camera;
 	
 	private static Board board = new Board();
@@ -54,6 +54,13 @@ public class GameScreen implements Screen {
 		Gdx.graphics.requestRendering();
 	}
 	
+	public static void endgame(int ID){
+		if(ID == 0){
+			game.setScreen(new EndScreen(game, 1));
+		}else{
+			game.setScreen(new EndScreen(game, ID));
+		}
+	}
 	public ArrayList<Token> init(){
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		players[0] = new Player("images/TokenWhite.png", 0, board.getAssets());
@@ -73,6 +80,20 @@ public class GameScreen implements Screen {
 	
 	public static void updateTokenPosition(Token tr){
 	int[] iter = {0, 1, -1, 8 , -8, 16, -16};
+		for(int i = 0 ; i < iter.length; i++){
+			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
+				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());
+		}
+	}
+	
+	public static void updateDameTokenPosition(Token tr){
+		int[] iter = new int[32];
+		for(int i = 0; i < 32; i+=4){
+			iter[i] = i;
+			iter[i +1] = (i * -1);
+			iter[i + 2] = (i * 8);
+			iter [i + 3] = (i * -8);
+		}
 		for(int i = 0 ; i < iter.length; i++){
 			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
 				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());

@@ -45,7 +45,7 @@ public class Player {
 			}
 		}
 		if(tokens.size() == 0){
-			System.out.println("Player" + ID + "  lost. I hope you had fun!");
+			GameScreen.endgame(this.ID);
 		}
 	}
 	

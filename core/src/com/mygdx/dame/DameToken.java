@@ -20,6 +20,45 @@ public class DameToken extends Token {
 		p.addToken(this);
 	}
 	
+	public void move(Asset field){
+		this.field = field;
+		field.setToken(this);
+		setPosition(field.getX(), field.getY());
+		setVisible(true);
+		GameScreen.updateDameTokenPosition(this);
+	}
+	
+	public void move(Asset field, Asset prevField){
+		if(player.getPlayerCanMove()){
+			System.out.println(field.getClass().toString());
+			this.field = field;
+			this.field.setToken(this);
+			prevField.setToken(null);
+			setPosition(field.getX(), field.getY());
+			setVisible(true);
+			player.setPlayerCanMove(false);
+			if(player.getID() == 0){
+				GameScreen.players[1].setPlayerCanMove(true);
+			}else{
+				GameScreen.players[0].setPlayerCanMove(true);
+			}
+			GameScreen.updateDameTokenPosition(this);
+			field.specialEvent();
+		}
+	}
+	
+	public void jumpOver(Asset field, Asset prevField, Asset jumpOverField){
+		if(player.getPlayerCanMove()){
+			this.field = field;
+			this.field.setToken(this);
+			prevField.setToken(null);
+			setPosition(field.getX(), field.getY());
+			jumpOverField.removeToken();
+			GameScreen.updateDameTokenPosition(this);
+			setVisible(true);
+		}
+	}
+	
 	public void addTargetHorizontal(final ArrayList<Asset> assets, final int target, Player p){
 		System.out.println(field.getIndex());
 		if(field.getIndex() + target >= 0 && field.getIndex() + target < assets.size()){
@@ -136,7 +175,7 @@ public class DameToken extends Token {
 		int yValue = super.getField().getIndex() / 8;
 		System.out.println(yValue);
 		
-		for(int i = 0; i < xValue; i++){
+		for(int i = 1; i <= xValue; i++){
 			addTargetHorizontal(assets, -i, this.getPlayer());
 			System.out.println(0);
 		}
