@@ -23,7 +23,6 @@ public class DameToken extends Token {
 			System.out.println("firstif");
 			dragAndDrop.addTarget(new Target(assets.get(field.getIndex() + target + checkifNegativ(target, 1))){
 				public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
-//					System.out.println(field.getIndex() + target + checkifNegativ(target, 1));
 					getActor().setColor(Color.GREEN);
 					Gdx.graphics.setContinuousRendering(true);
 					return true;
@@ -108,18 +107,18 @@ public class DameToken extends Token {
 		System.out.println(xValue);
 		int yValue = super.getField().getIndex() / 8;
 		System.out.println(yValue);
-		for(int i = xValue; i < 8; i++){
+		for(int i = xValue + 1; i < 8; i++){
 			addTargetHorizontal(assets, i, this.getPlayer());
 			System.out.println(0);
 		}
-		for(int i = xValue; i >= 0; i--){
+		for(int i = xValue + 1; i >= 0; i--){
 			addTargetHorizontal(assets, i, this.getPlayer());
 			System.out.println(1);
 		}
-		for(int i = yValue; i < 8; i++){
+		for(int i = yValue + 1; i < 8; i++){
 			addTargetVertical(assets, i, this.getPlayer());
 		}
-		for(int i = yValue; i >= 0; i--){
+		for(int i = yValue + 1; i >= 0; i--){
 			addTargetVertical(assets, i, this.getPlayer());
 		}
 	}
