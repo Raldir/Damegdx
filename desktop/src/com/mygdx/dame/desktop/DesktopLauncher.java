@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = DameMain.TITLE;
 		cfg.width = DameMain.WIDTH * DameMain.SCALE;
-		cfg.height = DameMain.HEIGHT * DameMain.SCALE;
+		cfg.height = (DameMain.HEIGHT + DameMain.HEIGHTINTERFACE)* DameMain.SCALE;
 		new LwjglApplication(new DameMain(), cfg);
 		
 	}

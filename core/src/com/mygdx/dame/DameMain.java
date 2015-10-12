@@ -9,6 +9,7 @@ public class DameMain extends Game {
 	public static String TITLE = "Dame";
 	public static int WIDTH = 800;
 	public static int HEIGHT = 600;
+	public static int HEIGHTINTERFACE = 150;
 	public static int SCALE = 1;
 
 	

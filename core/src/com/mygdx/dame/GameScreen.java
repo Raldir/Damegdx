@@ -1,30 +1,17 @@
 package com.mygdx.dame;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
 public class GameScreen implements Screen {
 
@@ -36,10 +23,11 @@ public class GameScreen implements Screen {
 	
 	protected static Player[] players = new Player[2];
 	protected static Stage stage;
+	protected static TextField[] textFieldL = new TextField[4];
 	
 	public GameScreen(DameMain game){
 		Gdx.graphics.setContinuousRendering(false);
-		this.game = game;
+		GameScreen.game = game;
 		
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
@@ -52,9 +40,12 @@ public class GameScreen implements Screen {
 		}
 
 		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-		TextField tf = new TextField("hello", skin);
-		stage.addActor(tf);
-		tr = init();
+		Window w = new Window("Information and Control Table", skin);
+		w.setBounds(0, DameMain.HEIGHT + DameMain.HEIGHTINTERFACE, DameMain.WIDTH, DameMain.HEIGHTINTERFACE);
+		w.setMovable(false);
+		initTextBoxes(w);
+		stage.addActor(w);
+		tr = initTokens();
 		for(Token t : tr){
 			stage.addActor(t);
 		}
@@ -69,7 +60,25 @@ public class GameScreen implements Screen {
 			game.setScreen(new EndScreen(game, ID));
 		}
 	}
-	public ArrayList<Token> init(){
+	
+	public void updateTextFieldList(String newText){
+		for(int i = 0 ; i < 3; i++){
+			textFieldL[i + 1] = textFieldL[i];
+		}
+		textFieldL[0].setText(newText);
+	}
+	
+	public void initTextBoxes(Window w){
+		for(int i = 0; i < 4; i++){
+			textFieldL[i] = new TextField(" " , new Skin(Gdx.files.internal("uiskin.json")));
+			textFieldL[i].setBounds(0,(DameMain.HEIGHTINTERFACE / 5) * i, DameMain.WIDTH, (DameMain.HEIGHTINTERFACE / 4));
+			w.addActor(textFieldL[i]);
+			if(i != 0){
+				textFieldL[i].setDisabled(true);
+			}
+		}
+	}
+	public ArrayList<Token> initTokens(){
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		players[0] = new Player("images/TokenWhite.png", 0, board.getAssets());
 		players[1] = new Player("images/Token.png", 1, board.getAssets());
