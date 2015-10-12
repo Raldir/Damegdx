@@ -113,10 +113,6 @@ public class DameToken extends Token {
 					boolean jumpedOver = false;
 					boolean tokenInWay = false;
 					for(int i = 8; i <= Math.abs(target); i+=8){
-						System.out.println(i);
-						System.out.println(checkifNegativ(target, i));
-						System.out.println(field.getIndex());
-						System.out.println(field.getIndex() + checkifNegativ(target, i));
 						if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken() != null){
 							if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken().getPlayer().getID() != player.getID()){
 								jumpOver(assets.get(field.getIndex() + checkifNegativ(target, i) + checkifNegativ(target, 8)),
