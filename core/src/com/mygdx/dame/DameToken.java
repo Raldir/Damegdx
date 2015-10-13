@@ -41,9 +41,10 @@ public class DameToken extends Token {
 			player.setPlayerCanMove(false);
 			if(player.getID() == 0){
 				GameScreen.players[1].setPlayerCanMove(true);
+				GameScreen.updateTextFieldList("Player" + 2 + " turn now.");
 			}else{
-				GameScreen.players[0].setPlayerCanMove(true);
-			}
+				GameScreen.updateTextFieldList("Player" + 1 + " turn now.");
+				GameScreen.players[0].setPlayerCanMove(true);			}
 			GameScreen.updateDameTokenPosition(this);
 			field.specialEvent();
 		}
@@ -57,6 +58,7 @@ public class DameToken extends Token {
 			setPosition(field.getX(), field.getY());
 			jumpOverField.removeToken();
 			GameScreen.updateDameTokenPosition(this);
+			GameScreen.updateTextFieldList("Player" + (player.getID() + 1)+ " just jumped over an enemy token. He can play again.");
 			setVisible(true);
 		}
 	}
@@ -79,6 +81,9 @@ public class DameToken extends Token {
 					for(int i = 1; i <= Math.abs(target); i++){
 						if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken() != null){
 							if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken().getPlayer().getID() != player.getID()){
+									if(assets.get(field.getIndex() + checkifNegativ(target, i +1)).getToken() != null){
+										return;
+									}
 								jumpOver(assets.get(field.getIndex() + checkifNegativ(target, i) + checkifNegativ(target, 1)),
 								field, assets.get(field.getIndex() + checkifNegativ(target, i)));
 								jumpedOver = true;
@@ -87,7 +92,6 @@ public class DameToken extends Token {
 							tokenInWay = true;
 						}
 						}
-					System.out.println(jumpedOver +" " + tokenInWay);
 					if(!jumpedOver && !tokenInWay){
 							move(assets.get(field.index + target), field);
 						
@@ -117,6 +121,9 @@ public class DameToken extends Token {
 					for(int i = 8; i <= Math.abs(target); i+=8){
 						if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken() != null){
 							if(assets.get(field.getIndex() + checkifNegativ(target, i)).getToken().getPlayer().getID() != player.getID()){
+									if(assets.get(field.getIndex() + checkifNegativ(target, i +1)).getToken() != null){
+										return;
+									}
 								jumpOver(assets.get(field.getIndex() + checkifNegativ(target, i) + checkifNegativ(target, 8)),
 								field, assets.get(field.getIndex() + checkifNegativ(target, i)));
 								jumpedOver = true;
@@ -125,7 +132,6 @@ public class DameToken extends Token {
 							tokenInWay = true;
 						}
 						}
-					System.out.println(jumpedOver +" " + tokenInWay);
 					if(!jumpedOver && !tokenInWay){
 							move(assets.get(field.index + target), field);
 						

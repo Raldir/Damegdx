@@ -10,6 +10,7 @@ public class DameMain extends Game {
 	public static int WIDTH = 800;
 	public static int HEIGHT = 600;
 	public static int HEIGHTINTERFACE = 150;
+	public static final int MAXHEIGHT= HEIGHT + HEIGHTINTERFACE;
 	public static int SCALE = 1;
 
 	
@@ -29,6 +30,10 @@ public class DameMain extends Game {
 //        setScreen(menu_screen);
 //    }
     
+	public void reset(){
+		this.dispose();
+		create();
+	}
     
 	@Override
 	public void render () {

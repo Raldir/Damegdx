@@ -26,7 +26,7 @@ public class MenuScreen implements Screen {
 		camera.setToOrtho(true, 1920, 1080);
 		
 		Image img = new Image(new Texture("images/MenuMainPicture.png"));
-		img.setBounds(0, 0, DameMain.WIDTH, DameMain.HEIGHT);
+		img.setBounds(0, 0, DameMain.WIDTH, DameMain.MAXHEIGHT);
 		stage.addActor(img);
 		stage.addActor(new ButtonActor("images/ButtenStart.png", 175f, 100f, game));
 		

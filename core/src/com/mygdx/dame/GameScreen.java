@@ -1,17 +1,21 @@
 package com.mygdx.dame;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GameScreen implements Screen {
 
@@ -61,11 +65,17 @@ public class GameScreen implements Screen {
 		}
 	}
 	
-	public void updateTextFieldList(String newText){
-		for(int i = 0 ; i < 3; i++){
-			textFieldL[i + 1] = textFieldL[i];
+	public static void updateTextFieldList(String newText){
+		String[] textList = new String[4];
+		for(int i = 1; i < 4; i++){
+			textList[i] = textFieldL[i].getText();
+			if(i > 1){
+				textFieldL[i].setText(textList[i - 1]);
+			}else{
+				textFieldL[i].setText(newText);
+			}
 		}
-		textFieldL[0].setText(newText);
+
 	}
 	
 	public void initTextBoxes(Window w){
@@ -75,6 +85,38 @@ public class GameScreen implements Screen {
 			w.addActor(textFieldL[i]);
 			if(i != 0){
 				textFieldL[i].setDisabled(true);
+			}else{
+				textFieldL[i].setColor(Color.RED);
+				textFieldL[i].setTextFieldListener(new TextFieldListener() {
+					
+					@Override
+					public void keyTyped(TextField textField, char c) {
+						if(Integer.valueOf(c) == 13){
+							if(textField.getText().contains("restart")){
+								game.reset();
+							}
+							if(textField.getText().contains("help")){
+								Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+								final Dialog dialog = new Dialog("Help", skin);
+								dialog.setBounds(0, DameMain.MAXHEIGHT / 3, DameMain.WIDTH * 0.88f, DameMain.MAXHEIGHT / 5f);
+								dialog.add(("Hello. This game is called Dame (german name). The game rule is pretty simple.\n"
+				+ "You can move each turn one of your Token one field forward. If an enemy Token stands\n"
+				+ "one field ahead of you, you can jump over it, and destroy it. If you are able to\n"
+				+ "get to the first field of the enemy Player, your Token will transform to a `Dame`.\n"
+				+ "The last Player who is still has a Token and / or a Dame wins."));
+								Button button = new Button();
+								button.addListener(new ClickListener() {
+								    public void clicked(InputEvent event, float x, float y) {
+								    	dialog.remove();
+								    }
+								});
+								dialog.button("close", button);
+								stage.addActor(dialog);
+							}
+						}
+						
+					}
+				});
 			}
 		}
 	}

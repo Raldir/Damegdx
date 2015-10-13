@@ -25,7 +25,7 @@ public class Token extends Image {
 	public Token(String pfad, Asset as, Player p){
 		super(createTexture(pfad));
 		super.setWidth(DameMain.WIDTH / 8);
-		super.setHeight((DameMain.HEIGHT / 8));
+		super.setHeight((DameMain.MAXHEIGHT - DameMain.HEIGHTINTERFACE) / 8);
 		this.pfad = pfad;
 		player = p;
 		move(as);
@@ -63,8 +63,12 @@ public class Token extends Image {
 			player.setPlayerCanMove(false);
 			if(player.getID() == 0){
 				GameScreen.players[1].setPlayerCanMove(true);
+				GameScreen.updateTextFieldList("Player" + 2 + " turn now.");
+
 			}else{
 				GameScreen.players[0].setPlayerCanMove(true);
+				GameScreen.updateTextFieldList("Player" + 1 + " turn now.");
+
 			}
 			GameScreen.updateTokenPosition(this);
 			field.specialEvent();
@@ -80,6 +84,7 @@ public class Token extends Image {
 			jumpOverField.removeToken();
 			GameScreen.updateTokenPosition(this);
 			field.specialEvent();
+			GameScreen.updateTextFieldList("Player" + player.getID() + " just jumped over an enemy token. He can play again.");
 			setVisible(true);
 		}
 	}
