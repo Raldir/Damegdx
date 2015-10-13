@@ -16,6 +16,8 @@ public class DameToken extends Token {
 
 	public DameToken(String pfad, Asset as, Player p) {
 		super(pfad, as, p);
+		super.setWidth(DameMain.WIDTH / 8);
+		super.setHeight(((DameMain.HEIGHT - DameMain.HEIGHTINTERFACE )/ 8));
 		GameScreen.stage.addActor(this);
 		p.addToken(this);
 	}

@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
 	public void initTextBoxes(Window w){
 		for(int i = 0; i < 4; i++){
 			textFieldL[i] = new TextField(" " , new Skin(Gdx.files.internal("uiskin.json")));
-			textFieldL[i].setBounds(0,(DameMain.HEIGHTINTERFACE / 5) * i, DameMain.WIDTH, (DameMain.HEIGHTINTERFACE / 4));
+			textFieldL[i].setBounds(0,(DameMain.HEIGHTINTERFACE / 5) * i, DameMain.WIDTH, (DameMain.HEIGHTINTERFACE / 5));
 			w.addActor(textFieldL[i]);
 			if(i != 0){
 				textFieldL[i].setDisabled(true);
