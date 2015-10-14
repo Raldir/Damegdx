@@ -47,7 +47,6 @@ public class Asset extends Image {
 	}
 	
 	public void removeToken(){
-		System.out.println(token.getX());
 		token.getPlayer().removeToken(token);
 		token.remove();
 		setToken(null);

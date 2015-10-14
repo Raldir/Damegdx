@@ -28,7 +28,7 @@ public class EndScreen implements Screen {
 		
 		Image mainPicture = new Image(new Texture("images/MainEndPicture.png"));
 		mainPicture.setBounds(0, 0, DameMain.WIDTH, DameMain.HEIGHT);
-		Texture temp = new Texture("images/Player" + (playerlost+1) + ".png");
+		Texture temp = new Texture("images/Player" + playerlost + ".png");
 		Image player = new Image(temp);
 		player.setBounds(DameMain.WIDTH * 0.35f, DameMain.HEIGHT * 0.733f, temp.getWidth() * (DameMain.WIDTH / 1920f), temp.getHeight() * (DameMain.HEIGHT / 1080f));
 		System.out.println((DameMain.WIDTH / 1920f));

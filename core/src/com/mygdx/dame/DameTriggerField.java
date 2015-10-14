@@ -21,6 +21,7 @@ public class DameTriggerField extends Asset {
 		if(token != null && token.getPlayer().ID == iD){
 			System.out.println("hello");
 			Player tempP = token.getPlayer();
+			token.player.removeToken(token);
 			token.remove();
 			token = new DameToken(tokenPfad, this, tempP);
 			return true;

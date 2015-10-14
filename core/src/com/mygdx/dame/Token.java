@@ -82,15 +82,15 @@ public class Token extends Image {
 			prevField.setToken(null);
 			setPosition(field.getX(), field.getY());
 			jumpOverField.removeToken();
+			setVisible(true);
 			GameScreen.updateTokenPosition(this);
 			field.specialEvent();
-			GameScreen.updateTextFieldList("Player" + player.getID() + " just jumped over an enemy token. He can play again.");
-			setVisible(true);
+			GameScreen.updateTextFieldList("Player" + (player.getID() + 1) + " just jumped over an enemy token. He can play again.");
 		}
 	}
 	
 	public void addTarget(final ArrayList<Asset> assets, final int target, Player p){
-		if(field.getIndex() + target + target >= 0 &&field.getIndex() + target + target < assets.size() && assets.get(field.getIndex() + target).getToken() != null && assets.get(field.getIndex() + target).getToken().getPlayer() != this.player){
+		if(field.getIndex() + target + target >= 0 && field.getIndex() + target + target < assets.size() && assets.get(field.getIndex() + target).getToken() != null && assets.get(field.getIndex() + target).getToken().getPlayer() != this.player){
 			dragAndDrop.addTarget(new Target(assets.get(field.getIndex() + target + target)){
 				public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
 					getActor().setColor(Color.GREEN);

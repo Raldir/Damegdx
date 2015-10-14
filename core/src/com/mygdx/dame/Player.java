@@ -44,8 +44,9 @@ public class Player {
 				tokens.remove(i);
 			}
 		}
+		System.out.println(tokens.size());
 		if(tokens.size() == 0){
-			GameScreen.endgame(this.ID);
+			GameScreen.endgame(ID);
 		}
 	}
 	

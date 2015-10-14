@@ -59,9 +59,9 @@ public class GameScreen implements Screen {
 	
 	public static void endgame(int ID){
 		if(ID == 0){
-			game.setScreen(new EndScreen(game, 1));
+			game.setScreen(new EndScreen(game, 2));
 		}else{
-			game.setScreen(new EndScreen(game, ID));
+			game.setScreen(new EndScreen(game, 1));
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
 			if(i != 0){
 				textFieldL[i].setDisabled(true);
 			}else{
-				textFieldL[i].setColor(Color.RED);
+				textFieldL[i].setColor(Color.GREEN);
 				textFieldL[i].setTextFieldListener(new TextFieldListener() {
 					
 					@Override
@@ -138,9 +138,9 @@ public class GameScreen implements Screen {
 	}
 	
 	public static void updateTokenPosition(Token tr){
-	int[] iter = {0, 1, -1, 8 , -8, 16, -16};
+	int[] iter = {0, 1, -1, 8 , -8};
 		for(int i = 0 ; i < iter.length; i++){
-			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
+			if(tr.getField().getIndex() + iter[i] >= 0 && tr.getField().getIndex() + iter[i] < 64)
 				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());
 		}
 	}
@@ -154,7 +154,7 @@ public class GameScreen implements Screen {
 			iter [i + 3] = (i * -8);
 		}
 		for(int i = 0 ; i < iter.length; i++){
-			if(tr.getField().getIndex() + iter[i] > 0 && tr.getField().getIndex() + iter[i] < 64)
+			if(tr.getField().getIndex() + iter[i] >= 0 && tr.getField().getIndex() + iter[i] < 64)
 				board.getAssets().get(tr.getField().getIndex() + iter[i]).refreshToken(board.getAssets());
 		}
 	}
