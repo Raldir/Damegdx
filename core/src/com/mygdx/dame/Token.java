@@ -63,11 +63,11 @@ public class Token extends Image {
 			player.setPlayerCanMove(false);
 			if(player.getID() == 0){
 				GameScreen.players[1].setPlayerCanMove(true);
-				GameScreen.updateTextFieldList("Player" + 2 + " turn now.");
+				GameScreen.updateTextFieldList("Player" + 2 + " moved to", field.getIndex());
 
 			}else{
 				GameScreen.players[0].setPlayerCanMove(true);
-				GameScreen.updateTextFieldList("Player" + 1 + " turn now.");
+				GameScreen.updateTextFieldList("Player" + 1 + " moved to", field.getIndex());
 
 			}
 			GameScreen.updateTokenPosition(this);
@@ -85,7 +85,7 @@ public class Token extends Image {
 			setVisible(true);
 			GameScreen.updateTokenPosition(this);
 			field.specialEvent();
-			GameScreen.updateTextFieldList("Player" + (player.getID() + 1) + " just jumped over an enemy token. He can play again.");
+			GameScreen.updateTextFieldList("Player" + (player.getID() + 1) + " moved to", field.getIndex());
 		}
 	}
 	

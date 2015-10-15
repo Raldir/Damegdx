@@ -65,14 +65,15 @@ public class GameScreen implements Screen {
 		}
 	}
 	
-	public static void updateTextFieldList(String newText){
+	public static void updateTextFieldList(String newText, int index){
+		char[] alp = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I'};
 		String[] textList = new String[4];
 		for(int i = 1; i < 4; i++){
 			textList[i] = textFieldL[i].getText();
 			if(i > 1){
 				textFieldL[i].setText(textList[i - 1]);
 			}else{
-				textFieldL[i].setText(newText);
+				textFieldL[i].setText(newText + " " + alp[index / 8] + index % 8);
 			}
 		}
 
@@ -87,10 +88,21 @@ public class GameScreen implements Screen {
 				textFieldL[i].setDisabled(true);
 			}else{
 				textFieldL[i].setColor(Color.GREEN);
+				textFieldL[i].setText("If you want to restart type: restart, to get help type: help");				
+				}
+				textFieldL[i].addListener(new ClickListener(){
+					
+					public void clicked(InputEvent event, float x, float y){
+						textFieldL[0].setText(" ");
+					}
+				});
 				textFieldL[i].setTextFieldListener(new TextFieldListener() {
 					
 					@Override
 					public void keyTyped(TextField textField, char c) {
+						if(Integer.valueOf(c) == 3){
+							textField.setText(" ");
+						}
 						if(Integer.valueOf(c) == 13){
 							if(textField.getText().contains("restart")){
 								game.reset();
@@ -118,8 +130,8 @@ public class GameScreen implements Screen {
 					}
 				});
 			}
-		}
 	}
+
 	public ArrayList<Token> initTokens(){
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		players[0] = new Player("images/TokenWhite.png", 0, board.getAssets());
