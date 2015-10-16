@@ -115,6 +115,7 @@ public class GameScreen implements Screen {
 				+ "You can move each turn one of your Token one field forward. If an enemy Token stands\n"
 				+ "one field ahead of you, you can jump over it, and destroy it. If you are able to\n"
 				+ "get to the first field of the enemy Player, your Token will transform to a `Dame`.\n"
+				+ " Im so cool im writing some gitlines"
 				+ "The last Player who is still has a Token and / or a Dame wins."));
 								Button button = new Button();
 								button.addListener(new ClickListener() {
