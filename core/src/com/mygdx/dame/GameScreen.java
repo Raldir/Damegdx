@@ -111,12 +111,8 @@ public class GameScreen implements Screen {
 								Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 								final Dialog dialog = new Dialog("Help", skin);
 								dialog.setBounds(0, DameMain.MAXHEIGHT / 3, DameMain.WIDTH * 0.88f, DameMain.MAXHEIGHT / 5f);
-								dialog.add(("Hello. This game is called Dame (german name). The game rule is pretty simple.\n"
-				+ "You can move each turn one of your Token one field forward. If an enemy Token stands\n"
-				+ "one field ahead of you, you can jump over it, and destroy it. If you are able to\n"
-				+ "get to the first field of the enemy Player, your Token will transform to a `Dame`.\n"
-				+ " Im so cool im writing some gitlines"
-				+ "The last Player who is still has a Token and / or a Dame wins."));
+								dialog.add(("This Game is called .Dame.. Its about Token, which can jump over other Token."
+										+ "the First Player who has lost all of his Token lost the game. Have fun"));
 								Button button = new Button();
 								button.addListener(new ClickListener() {
 								    public void clicked(InputEvent event, float x, float y) {
