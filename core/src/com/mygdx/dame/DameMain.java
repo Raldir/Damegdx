@@ -14,12 +14,12 @@ public class DameMain extends Game {
 	public static int SCALE = 1;
 
 	
-	public MenuScreen menu_screen;
+	public TestScreen menu_screen;
 	
 	
 	@Override
 	public void create () {
-		menu_screen = new MenuScreen(this);
+		menu_screen = new TestScreen();
 		this.setScreen(menu_screen);
 	}
 	
